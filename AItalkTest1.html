@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.4/jsrsasign-all-min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/load-svg-file/dist/load-svg-file.js"></script>
+	<script src="https://apis.google.com/js/api.js"></script>
+      <style>
+.mouth {
+  d: path("m238,137 q 20,25 40,0 q -20,5 -40,0 "); 
+  animation: cover 1.5s ease-in 900;
+}
+
+
+@keyframes cover {
+    
+  0% {
+     d: path("m238,137 q 20,25 40,0 q -20,5 -40,0 ");
+  }
+  20% {
+     d: path("m238,137 q 20,35 40,0 q -20,-5 -40,0 ");
+  }
+
+  80% {
+    d: path("m238,137 q 20,15 40,0 q -20,15 -40,0 ");
+  }
+}
+ 
+</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.4/jsrsasign-all-min.js"></script>
+	<script src="https://apis.google.com/js/api.js"></script>
+    <title>speech recognition and query</title>
+  </head>
+  <body>
+    <header>
+      <h1>Browser speech recognition and talking</h1>
+    </header>
+    <main>
+<div id="face">
+ <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500">
+ <g stroke="black" stroke-width="2" fill="none" >
+ 
+    </g>
+    <g>
+  <title>Layer 1</title>
+  <ellipse id="svg_2" cy="82" cx="159" stroke-width="5" stroke="#000000" fill="#FF0000"/>
+  <ellipse ry="92" rx="87" id="svg_3" cy="221" cx="261" stroke="#000000" fill="#cccccc"/>
+  <ellipse id="svg_4" cy="583" cx="146" stroke="#000000" fill="#cccccc"/>
+  <rect stroke-width="0" id="svg_5" height="113" width="189" y="67" x="166" stroke="#000000" fill="#cccccc"/>
+  <rect id="svg_6" height="0" width="1" y="-58" x="-181" stroke-width="2" stroke="#000000" fill="#cccccc"/>
+  <circle id="svg_7" r="17.80449" cy="107" cx="197" stroke-width="2" stroke="#000000" fill="#000000"/>
+  <circle id="svg_9" r="18.43909" cy="104" cx="320" stroke-width="2" stroke="#000000" fill="#000000"/>
+  <circle id="svg_10" r="1" cy="-60" cx="198" stroke-width="2" stroke="#000000" fill="#000000"/>
+  <rect id="svg_11" height="18" width="51" y="206" x="123" stroke-width="2" stroke="#000000" fill="#000000"/>
+  <rect id="svg_12" height="23" width="84" y="206" x="346" stroke-width="2" stroke="#000000" fill="#000000"/>
+  <rect transform="rotate(28.967660903930664 108.50000000000006,200) " id="svg_13" height="18" width="33" y="191" x="92" stroke-width="2" stroke="#000000" fill="#cccccc"/>
+  <rect id="svg_15" transform="rotate(-39.805572509765625 112.99999999999999,234.00000000000003) " height="18" width="33" y="225" x="96.5" stroke-width="2" stroke="#000000" fill="#cccccc"/>
+  <rect id="svg_16" transform="rotate(28.967660903930664 437,234.00000000000003) " height="18" width="33" y="225" x="420.5" stroke-width="2" stroke="#000000" fill="#cccccc"/>
+  <rect transform="rotate(-3.0127875804901123 440,205.9999999999996) " id="svg_17" height="18" width="33" y="197" x="423.5" stroke-width="2" stroke="#000000" fill="#cccccc"/>
+  <circle stroke="#000000" id="svg_18" r="56.25971" cy="258" cx="262" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" fill="#ffffff"/>
+  <path id="mouthPath" d="m238,137 q 20,25 40,0 q -20,5-40,0" ;="" fill="red"></path>	 
+ </g>
+  </g>  
+ </svg>
+</div>
+
+ <div>
+	 
+      <button id="button">Start listening</button>
+      <div id="result"></div>
+      <p id="message" hidden aria-hidden="true">
+        Your browser doesn't support Speech Recognition. Sorry.
+      </p>
+	  <p id="inputText">    </p>
+    </main>
+
+    <script>
+// This works well!
+// process:  start-->recognition.start()
+ //recognition.start() = event=> {... sendRecogitionText(...) }
+//  recognition.addEventListener("result", onResult);
+//  OnResult---> (sendRecogitionText(order)--->queryDialog----> sendText--->speak())
+//
+//===================== get token:
+	let private_key_id = "492047662a52d9e81b72aa3a91c44bd5f64e6dc3";
+	let private_key = "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDb88Y1I1qiF8G5\n7zY2fpdEn7htgh3YQJtnRYUZ4Q02fewFn1IRloaeGe69wu/49d6YTzBuvbVuLR7k\n4DylmWnoNXq4zsJshUcdbps4BP33eTk/YF2fcFq851MTfoV5TmG/bsYbja5BwZa4\nPoxkLozXe0F2ZfMSWWiL9VvA/lKoegwxm/sHFa+QLRlk5EFANeNsHMSPuxvL3RUi\nQtFCOYQQylzMm6czx5RmSErypUYk6S+wRlIqsbm6SeCzyqWAg6Hc/23hJ42OC1Ee\n1NLWE6N9wyiXxTZ2Nz/fh86jFYcWAooek4TKwOeiD779WRLSRktykYLU0Tiia3MD\nS7kMGtW5AgMBAAECggEAEFQaUo8Plyl21QgUaPrAXZSS4zRN5WQ0dTf0v91Udwdl\nmmw/sjUPxNRthBJg8MVF814rnQkB205HtRuNfQi000uHEwmsZtSFGUMBDGlYdkL+\nVD1h7ehwIAZ3RSL3IzCFsqm1VM3RkimeOArSrsxC4etRSooaf7H6ACvkliD7P2z+\nwQo2MNwufhmNaGYDjjBOr0nINFtgtA10YUn6q742y8btmT1gtt0+jOwYpVbUhr6h\nfS1v3A2u+TwKLYyhXPNrjfL/ip73CFs6bB8+GwTFqCvClWrYD0Lsdim+PCxZmRaH\n0DCHMpnYQY/GgBbIdpG9vRrfh2H43DAhxsJtDO0uQQKBgQD+w4s2NX78iVMo44e9\nuEXlTk83U+gwcfysFHvmfrV8muTCmPKsfEMn1fgcH8VLyxoBuKaqnigQsUDqcjAy\nXBpOYih4AIhKPO24haNwQbJIy8uNZCQRzszK6ff30vr1cRlVf0hXcIpl26WIlceF\nspWl9j4Q2/j7jR5rEhuIRPK34QKBgQDdBP0yJ76J+ElzK/QHqE4HG+xwWirDE1wv\nSu02Qkq2frY2kuZmc+e+weygPs8YOIUllbSRdoqG7hFLGSMQYxPp3n7aHXl8/uLc\nE2cfWKbusxpVfI/YoORf1BljWNPL6KZixRTvEndJi2Ay3Ce/K9xAJr/9PRO8olSz\ntNMeg5v42QKBgH2+UEjaUKoesZ/95bK7cCxE4Y6CaJj4uejJV3ol0jgFT6HI0gZW\ncuMHliVzfPLy9QwicojF9SqAAnV1FNrWYNmNU0IfqSVTO1YXB9tRYcjSZc6MvczY\nUHZa0txMEzfvsbxkTXVzA6xQpDxtCQSxZ3F5v5qcqCCov3nDfzlcJpyhAoGAKVUl\nhJuqJmMoWUF/AW+YJ/ww21IBbTnRo4Z/lgYPstE/gjU2oTJLxIC/n7gfQohPXhgB\nDLL+dP1QfprU09uzfaj+UAvzDE0eX8nBHzuU/E7CPfptbDWqf8FKfim+cgOwGgiB\nQbRSWo6WDuzdAgNRzS1x+gnSBxTUgkbutGYoZQECgYEAo9gUNUPUaCwlPwahM0si\noF1NkpGx04s+Seh+4l0ixR2PwZTlkChKEu0pgIgP3aDzcso0bpNtmI2w/z+0LOWB\nLlI2ju1ww4MuWXeSkfVDZCkDUA1tPLRd5ONa9JVr+gxdRoNsO54RFFHmRFBmQ/cP\nSfuji+y9Sg8EN9pPtxavL8o=\n-----END PRIVATE KEY-----\n";
+	let client_email = "alan123@mymega-hc9x.iam.gserviceaccount.com";
+	const header = {
+        alg: 'RS256',
+        typ: 'JWT',
+        kid: private_key_id  ////???
+      }
+
+      // Payload
+      const payload = {
+        iss: client_email,
+        sub: client_email,
+        iat: KJUR.jws.IntDate.get('now'),
+        exp: KJUR.jws.IntDate.get('now + 1hour'),
+        aud: 'https://dialogflow.googleapis.com/google.cloud.dialogflow.v2.Sessions'	
+      }
+      
+      const stringHeader = JSON.stringify(header);
+      const stringPayload = JSON.stringify(payload);
+      var token = KJUR.jws.JWS.sign('RS256', stringHeader, stringPayload, private_key);
+	
+	console.log("token: " + token);
+//====== Got token for Dialogflow service  
+var recognition;
+var timer1;
+var timeron = false;
+var timeStamp1;
+var timeStamp2;
+var base_url = 'https://dialogflow.googleapis.com/v2/projects/mymega-hc9x/agent/sessions';
+var sessionId = Math.floor(Math.random() * 10000000);
+var languageCode = 'en-US';
+ async function queryDialog(input_data){
+ console.log("input_data2:" + input_data )
+  const response = await fetch(
+  base_url + sessionId + ":detectIntent", {
+
+		    method: 'POST',	
+			
+			headers: {
+				"Accept": "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+
+                "Authorization": "Bearer " + token,
+
+            },
+
+			
+            body: JSON.stringify(input_data)
+
+        });
+		
+		
+	 const data = await response.json();
+	// console.log(data);
+	 console.log("result: ", data.queryResult.fulfillmentText);
+	 speak(data.queryResult.fulfillmentText);
+};	
+	// 
+let inputText = document.querySelector("#inputText");
+var button = document.getElementById("button");
+var listening= false;
+var speaking= false;
+    button.addEventListener("click", event => {
+      listening ? stopListening() : startListening();
+	  console.log("button1:" + button);
+ //           listening = !listening;
+          });
+
+const result = document.getElementById("result");
+const main = document.getElementsByTagName("main")[0];  //-------
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+ recognition = new SpeechRecognition();
+		  
+
+recognition.onend = function() {
+		console.log('Speech recognition service end');
+		let d2 = new Date();
+		let tempStamp1 = d2.getTime();
+		let difference1 = tempStamp1 - timeStamp1;
+		console.log("recognition difference:" + difference1);
+		listening = false;
+		button.textContent = "Start listening";
+		timeron = true;
+		timer1 = setTimeout(()=>{	
+		startListening();
+		timeron = false;
+		}, 1500);// ???????
+		}
+			
+const onResult = event => {
+        inputText.innerHTML = "";
+        for (const res of event.results) {
+             const text = document.createTextNode(res[0].transcript);
+			 recogitionText =res[0].transcript;
+             if (res.isFinal) {
+                inputText.innerHTML = recogitionText;
+              }
+
+            }
+		let d1 = new Date();
+         timeStamp1 = d1.getTime(); // get timeStamp1 
+			if(recogitionText){
+		sendRecogitionText(recogitionText);
+		}  
+          };
+		  
+recognition.continuous = false;
+recognition.interimResults = false; //True is the same result, why?
+recognition.addEventListener("result", onResult);
+		
+if (typeof SpeechRecognition == "undefined") {
+    button.remove();
+    inputText.innerHTML = "The browser does not support speech recognition.";
+        }   		
+
+	  //////
+
+	//go to Dialogflow:
+	//
+		 
+	const sendRecogitionText = (order) => {
+	console.log("function get order:" + order);
+	//go to Dialogflow:
+	//
+		 
+	let query =order;
+	console.log("query.length:" + query.length);
+	if((query.length > 0) &&(speaking == false )){
+	let query_data = {"queryInput": {"text": {"text":query,"languageCode":"en-US"}}};	
+	queryDialog(query_data);}
+	}
+	
+const speak = message => {
+ if(listening){
+ recognition.stop;
+ listening = false;
+}
+  const msg = new SpeechSynthesisUtterance( )
+  msg.text = message;
+  msg.lang = 'en-US';
+  //var voices = window.speechSynthesis.getVoices();
+ // msg.voice = voices[4];
+  msg.pitch = 1;
+  console.log("msg will be spoken.");
+  console.log("message:" + message);
+  window.speechSynthesis.speak(msg);
+  
+  msg.onstart = function(event) {
+    if(listening) {
+	listening = false;
+	recognition.stop};
+	if(timeron){
+	clearTimeout(timer1);
+	timeron = false;
+	};
+    speaking = true; 
+    changeFace(); //moving lips
+	let d3 = new Date();
+    timeStamp2 = d3.getTime();	
+    console.log('We have started uttering this speech: ' + event.utterance.text);
+  }
+  msg.onend = function(event) {
+       mouthPath.classList.remove(...mouthPath.classList);
+  	let d4 = new Date();
+    tempStamp2 = d4.getTime();	
+    let difference2 = tempStamp2 - timeStamp2 ;
+	console.log("msg duration :" + difference2);
+	console.log("speaking :" + speaking);
+	console.log("listening :" + listening);
+  speaking = false;
+  console.log('msg has finished being spoken after ' + event.elapsedTime + ' milliseconds.');
+  //if(listening == false){
+  startListening(); // at end of speak, start Listening. 
+  }
+  //}
+  
+  msg.onerror = function(event){
+  console.log("msg error: ")
+  }
+}
+ 
+function startListening() {
+  console.log("button2:" + button);
+  console.log("speaking listening:" + speaking + listening );
+  if((speaking == false) && (listening == false)){
+  listening= true;
+  // console.log("OK!OK");
+  setTimeout(recognition.start(),20);
+  button.textContent = "Stop listening";
+  console.log("button.textContent:" + button.textContent);
+   }  
+  }
+  
+function stopListening() {
+		console.log("button3:" + button);
+		listening = false;
+        recognition.stop();
+        button.textContent = "Start listening";
+         };
+function changeFace() {
+mouthPath.classList.remove(...mouthPath.classList);
+mouthPath.classList.add("mouth");
+}
+  
+  
+ 
+    </script>
+  </body>
+</html>
