@@ -354,6 +354,7 @@ function animateNode(element, animation, prefix = '') {
     const animationName = `${prefix}${animation}`;
     const node = element;
 	console.log("node:" + node);
+	console.log("animationName:" + animationName);
     node.classList.add(animationName);
 
     // When the animation ends, we clean the classes and resolve the Promise
