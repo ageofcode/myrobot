@@ -351,8 +351,10 @@ lipsPath.classList.add("movingLips");
 function animateNode(element, animation, prefix = ''){
     const animationName = `${prefix}${animation}`;
     const node = element;
-	node.classList.add(animationName);
-	node.onanimationend = (event) => {
+	    const animationName = `${prefix}${animation}`;
+    const node = element;
+    node.classList.add(animationName);
+    node.onanimationend = (event) => {
     console.log('Animation ended');
 	event.stopPropagation();
     node.classList.remove(animationName);
