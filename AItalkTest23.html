@@ -318,6 +318,8 @@ const speak = message => {
   msg.onstart = function(event) {
   setTimeout(function(){ 
   lipsPath.style.animationIterationCount = "infinite" }, 200); 
+  //when speaking, stop listening:
+  stop();
   }
   
   msg.onend = function(event) {
