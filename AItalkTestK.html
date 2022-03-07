@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/8.0.4/jsrsasign-all-min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/load-svg-file/dist/load-svg-file.js"></script>
+	<script src="https://apis.google.com/js/api.js"></script>
+      <style>
+	  
+.movingLips {
+  d: path("m282,173 c-1.19014,34.35331 -96.16325,34.35331 -94.97311,0.97102 c 1.19014, 14.35331 96.16325, 14.35331 94.97311, -0.97102");
+  animation: mouth 1s ease-in 1;
+}
+
+@keyframes mouth {
+    
+  25% {
+     path("m282,173 c-1.19014,34.35331 -96.16325,34.35331 -94.97311,0.97102 c 1.19014, 14.35331 96.16325, 14.35331 94.97311, -0.97102");
+  }
+  75% {
+     d: path("m282,173 c-1.19014,34.35331 -96.16325,34.35331 -94.97311,0.97102 c 1.19014, -5 96.16325, -5 94.97311, -0.97102");
+  }
+}
+
+/*
+======
+rollerRight
+======
+*/
+.rollerRight{
+	animation-name: rollerRight;
+	-webkit-animation-name: rollerRight;	
+
+	animation-duration: 2s;	
+	-webkit-animation-duration: 2s;
+
+	animation-timing-function: ease;	
+	-webkit-animation-timing-function: ease;
+
+	animation-iteration-count: 1;
+	-webkit-animation-iteration-count: 1;
+
+	-webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+}
+@keyframes rollerRight {
+  0% {
+  	transform: translateX(-200px) rotate(0);
+  	opacity: 0;	
+  }				
+  100% {
+  	transform: translateX(0) rotate(2turn);
+  	opacity: 1;
+  }
+}
+@-webkit-keyframes rollerRight {
+  0% {
+  	-webkit-transform: translateX(-200px) rotate(0);
+	opacity: 0;	
+  }				
+100% {
+	-webkit-transform: translateX(0) rotate(2turn);
+	opacity: 1;	
+  }
+}
+
+/*
+======
+rollerLeft
+======
+*/
+
+.rollerLeft{
+	animation-name: rollerLeft;
+	-webkit-animation-name: rollerLeft;	
+
+	animation-duration: 2s;	
+	-webkit-animation-duration: 2s;
+
+	animation-timing-function: ease;	
+	-webkit-animation-timing-function: ease;
+
+	animation-iteration-count: 1;
+	-webkit-animation-iteration-count: 1;
+
+	-webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+
+}
+@keyframes rollerLeft {
+  0% {
+  	transform: translateX(200px) rotate(0);
+  	opacity: 0;	
+  }	
+  100% {
+  	transform: translateX(0) rotate(-2turn);
+  	opacity: 1;	
+  }
+}
+@-webkit-keyframes rollerLeft {
+  0% {
+  	-webkit-transform: translateX(200px) rotate(0);
+  	opacity: 0;	
+  }				
+  100% {
+  	-webkit-transform: translateX(0) rotate(-2turn);
+	opacity: 1;	
+  }
+}
+
+
+
+ 
+</style>
+    <title>speech recognition and query</title>
+  </head>
+  <body>
+    <header>
+      <h1>Browser speech recognition and talking</h1>
+    </header>
+<div id = "frogDIV" >
+<svg width="480" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - https://github.com/SVG-Edit/svgedit-->
+ <g class="layer" xmlns="http://www.w3.org/2000/svg">
+  <title>Layer 1</title>
+  <ellipse cx="364.08713" cy="366.26923" fill="#007f3f" id="svg_5" rx="41.29911" ry="88.70418" stroke="#000000" transform="matrix(0.807959 0.550067 -0.536997 0.828991 264.581 -138.516)"/>
+  <ellipse cx="116.72481" cy="341.90808" fill="#007f3f" id="svg_6" rx="45.20838" ry="84.24443" stroke="#000000" transform="matrix(1 0 0 1 0 0) matrix(0.806345 -0.650177 0.591446 0.886416 -182.51 135.067)"/>
+  <circle cx="236" cy="321.5" fill="#007f3f" id="svg_8" r="126.20596" stroke="#007f3f" transform="matrix(1 0 0 1 0 0)"/>
+  <ellipse cx="237" cy="298.5" fill="#00bf5f" id="svg_12" rx="80" ry="103.5" stroke="#00bf5f"/>
+  <ellipse cx="236" cy="166.5" fill="#007f3f" id="svg_13" rx="113" ry="92.5" stroke="#007f7f" stroke-width="4"/>
+  <circle cx="176" cy="94" fill="#007f3f" id="svg_14" r="46.31129" stroke="#007f3f"/>
+  <circle cx="298" cy="96" fill="#007f3f" id="svg_15" r="46" stroke="#007f3f"/>
+  <circle cx="178.5" cy="97" fill="#ffffff" id="svg_16" r="32" stroke="#007f3f"/>
+  <circle cx="294" cy="100" fill="#ffffff" id="svg_17" r="34.20526" stroke="#007f3f"/>
+  <circle cx="178.5" cy="101.5" fill="#000000" id="svg_18" r="18.33287" stroke="#000000"/>
+  <circle cx="293.5" cy="105.5" fill="#000000" id="svg_19" r="19.36068" stroke="#000000"/>
+  <path d="m170.93236,442.41688c-1.19014,-51.60446 -96.16325,-51.60446 -94.97311,1.45864" fill="#007f3f" id="footLeft" stroke="#007f3f" transform="matrix(1 0 0 1 0 0)"/>
+  <path d="m394.49212,443.53215c-1.19014,-51.60446 -96.16325,-51.60446 -94.97311,1.45864" fill="#007f3f" id="footRight" stroke="#007f3f"/>
+ </g>
+ <g class="layer">
+  <title>Layer 2</title>
+  <path d="m282,173 c-1.19014,34.35331 -96.16325,34.35331 -94.97311,0.97102 c 1.19014, 14.35331 96.16325, 14.35331 94.97311, -0.97102" fill="red" id="lipsPath" stroke="#007f3f"/>
+ </g>
+</svg>
+</div>
+    <div>
+      <button id="button">Start listening</button>
+      <div id="result"></div>
+      <p id="message" hidden aria-hidden="true">
+        Your browser doesn't support Speech Recognition. Sorry.
+      </p>
+	  <p id="inputText">    </p>
+    </div>
+</div>
+
+
+
+    <script>
+// This works well!
+//===================== get token:
+	let private_key_id = "d5c4da42582d0f84123320a5ad7e7aee4ab38752";
+	let private_key ="-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDfJTds6i8HWwqc\nyMHCV6kcXWE1wg2L2PBUgrtDOXsuP1eqero+uswGCzP/W5a6aJSK0unJaJVg4FQu\nOhdivAQeWj+zmUZ0qNJQSBhRh9v4tkl/P9kyz6mAnEeumfRh0sTb+ROsyGoZiLDj\nf0F1RvKHVvyvmKWGj/u4ozE6ZdapqjMM0xRg6PMtFWGsnYRpfH3FVz96/PYnByCs\nutCWy1EJVa8xjhRd831EMNEw/YSsC7ZZbMG/HwE2OdAGARc9rzdYUySPGCK1QC2/\n1lxnz4+WhAsqowgLozu4YZx9ItfxJZJXL8ziVov0ByUQhRP4Z3T737hOKBps4bR0\ngagFoPKZAgMBAAECggEAUHsmy2SHQ7rlT/jkUUi2mKFhTzdHFXpP69se2TchI2P7\nJWSQSdGrhj6CKYaKDX9sm8lIQrkyrzcZhXa0OosfXScltIwCqk69U/E8vCMpBkIQ\nrhGEL9xQAS/cdq/WQXX4RHJIU1gRVFZFnjemjzrgfEm2Z0rB4I+LtWM+fRZ/3r70\nmteLy600N7n7dv/g0OsYlu/bCH+OhyOYO2tH+ZRWuI6Pira4YbJfxXo0Z+nNXsZm\nlg1su1GEUJHWO0zF9QbiqIvHrE08fczdeF50mdGAetY185G0KGnN7Xyk1iFsnZV1\nnCkOrxcguFiWWWfynEp6J2DqSDnYH9nz+XvDsX0YRQKBgQD3Qn8sGpp3rK/EifMH\ns+LO+EiCrixtdpSokgNE/SkF2QVndVKdxe5qXQL9jNp2iApUutKC6ZItTPI33v8I\nI0TqfGacUBrR7me2lPJLsnyZjbxiLSr73+neVoIgolkdybWW4IigXfe73mkIBlDo\njb1XS0GVf7efl4AgJN6X+W60PwKBgQDnCID/n2t0gX0Xm02NhT5B21wcWoDalO+4\nOHwBg1dolXIPNUKRKA6WuO7hmbGwhs2xwppYYtS8PCGU3ofKe8Li2H8srGkq7H/Q\nqwbtzHe6MTakbtBJUYMUJ4BYa3Vs6/z149EnjhvneR/uS6u6IJVF+FNYJ+MNOLes\nNY9cMalDJwKBgEnQu0CCbKzfi9WjzT72b/aT3qnMr4y6QuUUOg+leFK7mEZrmw9o\n4KU2QUdKfom2UUc8Qs48RpxphUIyu3ZFeTR7kPKHY4panvG+A5ufnF0HGD9C9rsc\n/KeYsd5mOS6QYjq5q3AcvXGDk12G7S6P6f+eguTLrRji1KhD+YPrPiZnAoGAN+u4\nBaeZw9Z/59HggKvKuPgWoIpLfBzmtUl+woL/CkJ6HDJBDY+LkHHs6FBiUR8f9LHs\n2A37/h/z5OvEJH+2WWAb0D1fK1OZUHHFOJPwOvIkjsJ/ye9f8eXpy/0erCGm1gGx\no4hjOrD3yJ8qTuAKIaiMy97Dt3SOCLHiJGek16sCgYEAwnMfD3ozjf0HNfZfDHb/\nh/U4ISCFYoGV4mrylZ/qmCoIfpVY2uiTZJDYystflzwi7yIscFreRyBOG9RPmgOx\nAnXv+lZFU/gUJnEO9AWxeq3ZcGwVZ+pVarP0z6FWgCees/2rBEpJR4+0GL+ei0F9\nM2CI3NB6qUDcOJi78pkZjpA=\n-----END PRIVATE KEY-----\n";
+	let client_email = "yunwei@greeting-kugm.iam.gserviceaccount.com";
+	const header = {
+        alg: 'RS256',
+        typ: 'JWT',
+        kid: private_key_id  ////???
+      }
+
+      // Payload
+      const payload = {
+        iss: client_email,
+        sub: client_email,
+        iat: KJUR.jws.IntDate.get('now'),
+        exp: KJUR.jws.IntDate.get('now + 1hour'),
+        aud: 'https://dialogflow.googleapis.com/google.cloud.dialogflow.v2.Sessions'	
+      }
+      
+      const stringHeader = JSON.stringify(header);
+      const stringPayload = JSON.stringify(payload);
+      var token = KJUR.jws.JWS.sign('RS256', stringHeader, stringPayload, private_key);
+	
+	console.log("token: " + token);
+//====== Got token for Dialogflow service  
+var base_url = 'https://dialogflow.googleapis.com/v2/projects/greeting-kugm/agent/sessions';
+var languageCode = 'en-US';
+ async function queryDialog(input_data){
+ console.log("input_data2:" + input_data )
+  const response = await fetch(
+  base_url + "/1234567:detectIntent", {
+
+		    method: 'POST',	
+			
+			headers: {
+				"Accept": "application/json, text/plain, */*",
+                "Content-Type": "application/json",
+
+                "Authorization": "Bearer " + token,
+
+            },
+
+			
+            body: JSON.stringify(input_data)
+
+        });
+		
+		
+	 const data = await response.json();
+	// console.log(data);
+	 console.log("result: ", data.queryResult.fulfillmentText);
+	 speak(data.queryResult.fulfillmentText);
+};	
+//
+
+var frogDIV = document.querySelector("#frogDIV");
+
+var frogSVG =  frogDIV.querySelector("svg");
+var lipsPath = frogSVG.querySelector('#lipsPath')
+console.log("lipsPath:" + lipsPath);
+frogSVG.classList.add('rollerRight');
+frogSVG.onanimationend = (event) => { // remove animation for next time trigger
+    console.log('Animation ended');
+	event.stopPropagation();
+    frogSVG.classList.remove('rollerRight');
+	 };
+lipsPath.classList.add("movingLips");
+	// 
+let inputText = document.querySelector("#inputText");
+const button = document.getElementById("button");
+var listening= false;
+var speaking= false;
+const result = document.getElementById("result");
+const main = document.getElementsByTagName("main")[0];  //-------
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+const recognition = new SpeechRecognition();
+		  
+const start = () => {
+      if (!listening) {	
+	  recognition.start();};
+	listening = true;
+	button.textContent = "Stop listening";
+		 };		  
+		  
+const stop = () => {
+		listening = false;
+        recognition.stop();
+        button.textContent = "Start listening";
+         };
+
+
+
+recognition.onend = function() {
+		console.log('Speech recognition service end');
+		listening = false;
+		button.textContent = "Start listening";
+		if (speaking == false) {
+			startListening();
+			}
+		}
+			
+const onResult = event => {
+        inputText.innerHTML = "";
+        for (const res of event.results) {
+             const text = document.createTextNode(res[0].transcript);
+			 recogitionText =res[0].transcript;
+             if (res.isFinal) {
+                inputText.innerHTML = recogitionText;
+              }
+
+            }
+		sendRecogitionText(recogitionText);
+          };
+		  
+recognition.continuous = false;
+          //recognition.interimResults = false; //True is the same result, why?
+recognition.addEventListener("result", onResult);
+
+button.addEventListener("click", event => {
+            listening ? stop() : start();
+            listening = !listening;
+          });
+		
+if (typeof SpeechRecognition == "undefined") {
+    button.remove();
+    inputText.innerHTML = "The browser does not support speech recognition.";
+        }   		
+
+	  //////  
+
+	var recogitionText ="";
+
+	const sendRecogitionText = (order) => {
+	console.log("function get order:" + order);
+	//go to Dialogflow:
+	//	 
+	let query =order;
+	let query_data = {"queryInput": {"text": {"text":query,"languageCode":"en-US"}}};
+	console.log("query:" + query_data );
+	queryDialog(query_data);
+	}
+	
+const speak = message => {
+  const msg = new SpeechSynthesisUtterance(message)
+  msg.lang = 'en-US';
+  var voices = window.speechSynthesis.getVoices();
+  msg.voice = voices[4];
+  msg.pitch = 1;
+  speaking = true;
+  window.speechSynthesis.speak(msg);
+  
+  msg.onstart = function(event) {
+  setTimeout(function(){ 
+  lipsPath.style.animationIterationCount = "infinite" }, 200); 
+  //when speaking, stop listening:
+  stop();
+  }
+  
+  msg.onend = function(event) {
+  lipsPath.style.animationIterationCount = "0";  // stop lips' moving.
+  speaking = false;
+  console.log('msg has finished being spoken after ' + event.elapsedTime + ' milliseconds.');
+  if (listening == false) {
+	startListening();
+	}
+  }
+}
+//speak("welcome");//
+function startListening() {
+  listening= true;
+  recognition.start();
+  button.textContent = "Stop listening";
+  }
+
+  </script>
+
+  </body>
+</html>
