@@ -214,9 +214,10 @@ var languageCode = 'en-US';
 	 console.log("result-fulfillmentMessages: ", data.queryResult.fulfillmentMessages);
 	 console.log("result-fulfillmentMessages-0: ", data.queryResult.fulfillmentMessages[0]);
 	 console.log("result-fulfillmentMessages-0text: ", data.queryResult.fulfillmentMessages[0].text.text[0]);
+	 if(data.queryResult.fulfillmentMessages[1].payload) {
 	 console.log("result-fulfillmentMessages-1: ", data.queryResult.fulfillmentMessages[1]);
 	 console.log("result-fulfillmentMessages-1payload: ", data.queryResult.fulfillmentMessages[1].payload);
-	 console.log("result-fulfillmentMessages-1payload: ", data.queryResult.fulfillmentMessages[1].payload.water);
+	 console.log("result-fulfillmentMessages-1payload: ", data.queryResult.fulfillmentMessages[1].payload.water);}
 	 speak(data.queryResult.fulfillmentText);
 };	
 //
