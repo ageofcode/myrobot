@@ -370,7 +370,7 @@ var languageCode = 'en-US';
 	 case "waste":
 	 zipcode =  data.queryResult.parameters['number'];
 	 //USA zip code validation
-	 let isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipcode);
+	 isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipcode);
 	 console.log("zipcode: ",isValidZip)
 	 console.log("waste case: ", zipcode );
 	 if(isValidZip == false) {
