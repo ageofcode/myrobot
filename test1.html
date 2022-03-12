@@ -368,7 +368,7 @@ var languageCode = 'en-US';
 	 break;
 	 
 	 case "waste":
-	 let zipcode =  data.queryResult.parameters['number'];
+	 zipcode =  data.queryResult.parameters['number'];
 	 //USA zip code validation
 	 let isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipcode);
 	 console.log("zipcode: ",isValidZip)
